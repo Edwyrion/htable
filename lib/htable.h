@@ -69,6 +69,8 @@
 
     /// @brief Create a hash map with the specified size.
     /// @param size Total number of nodes in the hash map.
+    /// @param hash User-defined hash function for the keys.
+    /// @param comp User-defined comparison function for the keys.
     /// @return Pointer to the allocated hash map.
     htable_t *htable_create (size_t size, hash_func_t hash, comp_func_t comp);
 
@@ -80,7 +82,6 @@
     /// @param map The hash map to insert the key-value pair into.
     /// @param key The key for the hash node.
     /// @param value The value for the hash node.
-    /// @param value_size The size of the value.
     /// @return 0 on success, -1 on failure.
     int htable_insert (htable_t *map, const void *key, const void *value);
 
@@ -96,6 +97,10 @@
     /// @return Pointer to the value on success, NULL on failure.
     void *htable_get (htable_t *map, const void *key);
 
+    /// @brief Retrieve the hash value for the key.
+    /// @param map The hash map to retrieve the hash value from.
+    /// @param key The key for the hash node.
+    /// @return The hash value for the key.
     static inline size_t get_hash (const htable_t *map, const void *key) {
         return map->hash(key) % map->size;
     }
