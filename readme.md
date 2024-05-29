@@ -10,35 +10,35 @@ $ make
 
 ## Function calls
 ```C
-/// @brief Create a hash map with the specified size.
-/// @param size Total number of nodes in the hash map.
-/// @param hash User-defined hashing function for the key.
-/// @param comp Usef-defined comparison function for the keys.
-/// @return Pointer to the allocated hash map.
-htable_t *htable_create (size_t size, hash_func_t hash, comp_func_t comp);
+/// @brief Create a hash table with the specified size.
+/// @param size Total number of nodes in the hash table.
+/// @param hash User-defined hash function for the keys.
+/// @param keq User-defined comparison function for the keys.
+/// @return Pointer to the allocated hash table, NULL on failure.
+htable_t *htable_create (size_t size, htable_hash_t hash, htable_keq_t keq, const struct callbacks *cbs);
 
-/// @brief Destroy the hash map and free resources.
-/// @param map The hash map to destroy.
-void htable_destroy (htable_t *map);
+/// @brief Destroy the hash table and free resources.
+/// @param table The hash table to destroy.
+void htable_destroy (htable_t *table);
 
-/// @brief Insert a key-value pair into the hash map.
-/// @param map The hash map to insert the key-value pair into.
+/// @brief Insert a key-value pair into the hash table.
+/// @param table The hash table to insert the key-value pair into.
 /// @param key The key for the hash node.
 /// @param value The value for the hash node.
-/// @return 0 on success, -1 on failure.
-int htable_insert (htable_t *map, const void *key, const void *value);
+/// @return 0 on success, -1 on invalid input, -2 on memory allocation failure.
+int htable_insert (htable_t *table, const void *key, const void *value);
 
-/// @brief Remove a key-value pair from the hash map.
-/// @param map The hash map to remove the key-value pair from.
+/// @brief Remove a key-value pair from the hash table.
+/// @param table The hash table to remove the key-value pair from.
 /// @param key The key for the hash node.
 /// @return 0 on success, -1 on failure.
-int htable_remove (htable_t *map, const void *key);
+int htable_remove (htable_t *table, const void *key);
 
-/// @brief Retrieve a value from the hash map.
-/// @param map The hash map to retrieve the value from.
+/// @brief Retrieve a value from the hash table.
+/// @param table The hash table to retrieve the value from.
 /// @param key The key for the hash node.
 /// @return Pointer to the value on success, NULL on failure.
-void *htable_get (htable_t *map, const void *key);
+void *htable_get (htable_t *table, const void *key);
 ```
 
 ## Example
