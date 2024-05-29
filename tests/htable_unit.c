@@ -92,9 +92,11 @@ int compare_string (const void *key1, const void *key2) {
 
 // --- Unit tests for hash table functions --- //
 
+#define HASH_MAX 1024
+
 void test_htable_create (void) {
 
-    htable_t *map = htable_create(HASH_MAX, NULL, NULL);
+    htable_t *map = htable_create(HASH_MAX, NULL, NULL, NULL);
 
     TEST(map != NULL); // 1
     TEST(map->table != NULL); // 2
@@ -105,7 +107,7 @@ void test_htable_create (void) {
 
 void test_htable_insert_int (void) {
 
-    htable_t *map = htable_create(1, hash_int, compare_int);
+    htable_t *map = htable_create(1, hash_int, compare_int, NULL);
 
     int key = 42;
     int value = 100;
@@ -121,7 +123,7 @@ void test_htable_insert_int (void) {
 
 void test_htable_insert_string (void) {
 
-    htable_t *map = htable_create(1, hash_string, strcmp);
+    htable_t *map = htable_create(1, hash_string, strcmp, NULL);
 
     char *key = "hello";
     char *value = "world";
@@ -137,7 +139,7 @@ void test_htable_insert_string (void) {
 
 void test_htable_collision_int (void) {
     
-    htable_t *map = htable_create(1, hash_int, compare_int);
+    htable_t *map = htable_create(1, hash_int, compare_int, NULL);
 
     int key1 = 0;
     int value1 = 100;
@@ -164,7 +166,7 @@ void test_htable_collision_int (void) {
 
 void test_htable_collision_string (void) {
         
-    htable_t *map = htable_create(2, hash_string, compare_string);
+    htable_t *map = htable_create(2, hash_string, compare_string, NULL);
 
     char *key1 = "hello";
     char *value1 = "world";
