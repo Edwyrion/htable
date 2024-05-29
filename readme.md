@@ -49,7 +49,7 @@ void print_value(htable_t *map, int key)
 
     if (value != NULL)
     {
-        (void )printf("(%d/%u, %d)\n", key, get_hash(map, &key), *value);
+        (void) printf("(%d/%u, %d)\n", key, get_hash(map, &key), *value);
         return;
     }
 
